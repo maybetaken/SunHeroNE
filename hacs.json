@@ -1,0 +1,7 @@
+{
+  "name": "SunHeroNE",
+  "hacs": "2.0.5",
+  "homeassistant": "2025.2.2",
+  "country": ["CN","US"],
+  "render_readme": true
+}
