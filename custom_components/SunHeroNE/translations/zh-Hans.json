@@ -1,0 +1,164 @@
+{
+  "config": {
+    "abort": {
+      "hub_already_configured": "广播服务(Hub)已配置，无需重复添加。",
+      "no_sn_found": "无法识别设备序列号。",
+      "mqtt_required": "未检测到 MQTT 集成。请先在 Home Assistant 中配置 MQTT 代理。"
+    },
+    "step": {
+      "user": {
+        "title": "配置 SunHero 广播服务",
+        "description": "请输入 MQTT 服务器的连接信息。这些信息将通过局域网广播给下位机设备，以便它们连接到 Home Assistant。",
+        "data": {
+          "mqtt_host": "MQTT 服务器 IP",
+          "mqtt_port": "端口",
+          "mqtt_user": "用户名",
+          "mqtt_pass": "密码"
+        }
+      },
+      "discovery_confirm": {
+        "title": "添加 SunHeroNE 设备",
+        "description": "发现设备：{name}，是否立即添加？"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "更新广播信息",
+        "description": "修改广播给下位机的 MQTT 连接信息。",
+        "data": {
+          "mqtt_host": "MQTT 服务器 IP",
+          "mqtt_port": "端口",
+          "mqtt_user": "用户名",
+          "mqtt_pass": "密码"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "batt_rated_volt": { "name": "[D09]额定电压", "state": { "96v": "96V", "72v": "72V", "48v": "48V", "24v": "24V", "12v": "12V" } },
+      "inverter_status": { "name": "逆变器状态", "state": { "shutdown": "关机", "inverting": "逆变中", "charging": "充电中", "anti_backflow": "防逆流", "bypass": "旁路", "off_grid": "离网" } },
+      "pv_flow": { "name": "PV流量", "state": { "no_pv": "无PV", "present": "接入", "generating": "发电中" } },
+      "batt_flow": { "name": "电池流量", "state": { "no_battery": "无电池", "present": "待机", "charging": "充电", "discharging": "放电" } },
+      "grid_flow": { "name": "电网流量", "state": { "no_grid": "无市电", "present": "待机", "importing": "买电", "exporting": "卖电" } },
+      "load_flow": { "name": "负载流量", "state": { "no_load": "空载", "load_active": "带载" } },
+      "mppt_fault": { "name": "故障状态", "state": { "normal": "正常", "batt_undervolt": "电池欠压", "batt_overvolt": "电池过压", "over_temp": "过温", "pv_overvolt": "PV过压", "over_current": "过流", "short_circuit": "短路" } },
+      "work_status": { "name": "工作状态", "state": { "shutdown": "关机", "pre_charge": "预充", "cc_charge": "恒流", "cv_charge": "恒压", "tracking": "追踪", "bus_cv": "母线恒压", "float_charge": "浮充" } },
+      "machine_model": { "name": "机器型号", "state": { "2_2kw": "2.2KW", "3_5kw": "3.5KW", "5_0kw": "5.0KW", "7_5kw": "7.5KW", "8_0kw": "8.0KW", "10_0kw": "10KW", "12_0kw": "12KW" } },
+      "mppt_status": { "name": "MPPT状态", "state": { "cv": "恒压", "full_load": "满载", "current_limit": "限流", "tracking": "追踪" } },
+      "sys_fault": { "name": "系统故障", "state": { "min_in_volt": "输入欠压", "max_in_volt": "输入过压", "in_over_freq": "过频", "in_under_freq": "欠频", "grid_switch": "市电切换", "inv_short": "逆变短路", "in_over_curr": "输入过流", "inv_bus_over": "母线过压", "pv1_over": "PV1过压", "pv2_over": "PV2过压", "pv1_over_curr": "PV1过流", "pv2_over_curr": "PV2过流", "charge_over_curr": "充电过流", "charge_over_volt": "充电过压", "batt_volt_prot": "电池保护", "inv_over_temp": "逆变过温", "normal": "正常" } },
+      "sw_version": { "name": "软件版本" },
+      "inv_output_max": { "name": "[D08]逆变器最大输出功率" },
+      "grid_volt": { "name": "电网电压" },
+      "grid_power": { "name": "电网功率" },
+      "load_power": { "name": "负载功率" },
+      "battery_volt": { "name": "电池电压" },
+      "battery_charge_discharge_current": { "name": "电池充放电电流" },
+      "pv1_power": { "name": "PV1 功率" },
+      "daily_yield": { "name": "日发电量" },
+      "total_yield": { "name": "总发电量" },
+      "fault_status": { "name": "故障代码" },
+      "inv_temp": { "name": "逆变器温度" },
+      "soc": { "name": "电池电量" },
+      "batt_volt": { "name": "电池电压" },
+      "batt_curr": { "name": "电池电流" },
+      "pv_volt": { "name": "PV电压" },
+      "charge_pow": { "name": "充电功率" },
+      "mppt_temp": { "name": "MPPT温度" },
+      "mppt1_temp": { "name": "MPPT1温度" },
+      "mppt2_temp": { "name": "MPPT2温度" },
+      "mppt3_temp": { "name": "MPPT3温度" },
+      "mppt_out_curr": { "name": "MPPT输出电流" },
+      "sys_ip": { "name": "IP地址" },
+      "sys_ssid": { "name": "WiFi 名称" },
+      "sys_rssi": { "name": "信号强度" },
+      "sys_version": { "name": "模块固件版本" },
+      "bus_volt": { "name": "母线电压" },
+      "grid_freq": { "name": "电网频率" },
+      "inv_out_volt": { "name": "逆变输出电压" },
+      "inv_off_load_curr": { "name": "离网负载电流" },
+      "inv_grid_curr": { "name": "市电电流" },
+      "inv_curr": { "name": "逆变电流" },
+      "load_pf": { "name": "负载功率因数" },
+      "inverter_pf": { "name": "逆变器功率因数" },
+      "inv_io_power": { "name": "逆变输入输出功率" },
+      "grid_rs_volt": { "name": "电网RS电压" },
+      "grid_st_volt": { "name": "电网ST电压" },
+      "grid_tr_volt": { "name": "电网TR电压" },
+      "grid_rs_curr": { "name": "电网RS电流" },
+      "grid_st_curr": { "name": "电网ST电流" },
+      "grid_tr_curr": { "name": "电网TR电流" },
+      "mppt1_volt": { "name": "MPPT1电压" },
+      "mppt2_volt": { "name": "MPPT2电压" },
+      "mppt3_volt": { "name": "MPPT3电压" },
+      "mppt1_curr": { "name": "MPPT1电流" },
+      "mppt2_curr": { "name": "MPPT2电流" },
+      "mppt3_curr": { "name": "MPPT3电流" },
+      "mppt1_pow": { "name": "MPPT1功率" },
+      "mppt2_pow": { "name": "MPPT2功率" },
+      "mppt3_pow": { "name": "MPPT3功率" },
+      "mppt_daily": { "name": "MPPT日发电" },
+      "mppt_total": { "name": "MPPT总发电" },
+      "dcdc_temp": { "name": "DCDC温度" },
+      "chg_lim_volt": { "name": "充电限制电压" },
+      "chg_lim_curr": { "name": "充电限制电流" },
+      "dis_lim_volt": { "name": "放电限制电压" },
+      "dis_lim_curr": { "name": "放电限制电流" },
+      "batt_total_volt": { "name": "电池组总压" },
+      "batt_total_curr": { "name": "电池组总流" },
+      "max_temp": { "name": "最高温度" },
+      "soh": { "name": "电池健康度" },
+      "remain_cap": { "name": "剩余容量" },
+      "full_cap": { "name": "满充容量" },
+      "cycle_count": { "name": "循环次数" },
+      "relay_status": { "name": "继电器状态" },
+      "alarm_flag": { "name": "报警标志" },
+      "protection_flag": { "name": "保护标志" }
+    },
+    "select": {
+      "work_mode": { "name": "[D01]工作模式", "state": { "sub_solar_grid_storage": "太阳能电网储能模式 SUB", "uti_grid_priority": "电网优先模式 UTI", "sbu_solar_storage_grid": "太阳能储能电网模式 SBU", "nbu_no_battery": "无电池AC耦合模式 NBU", "oni_pure_inverter": "纯逆变模式 ONI" } },
+      "grid_volt_range": { "name": "[D02]电网电压范围", "state": { "wide_90_270v": "90-270V WID", "normal_160_240v": "160-240V NOR" } },
+      "inv_ac_volt": { "name": "[D03]逆变输出电压", "state": { "110v": "110V", "120v": "120V", "208v": "208V", "220v": "220V", "230v": "230V", "240v": "240V" }},
+      "charge_priority": { "name": "[D06]充电优先级", "state": { "solar_priority": "太阳能优先 CSO", "grid_priority": "电网优先充电 CUT", "solar_and_grid": "太阳能和电网充电 SNU", "solar_only": "仅太阳能充电 OSO" } },
+      "battery_type": { "name": "[D07]电池类型", "state": { "lead_acid": "铅酸", "lithium": "锂电" } },
+      "batt_type": { "name": "电池类型", "state": { "lead_acid": "铅酸", "lithium": "锂电" } },
+      "force_control": { "name": "[D21]强制控制", "state": { "normal": "正常", "force_charge": "强制充电", "force_discharge": "强制放电" }},
+      "ac_freq": { "name": "[D04]交流频率", "state": { "50hz": "50Hz", "60hz": "60Hz" } },
+      "schedule_enable": { "name": "计划使能", "state": { "disabled": "禁用", "charge_only": "仅充电", "discharge_only": "仅放电", "both": "充放电" } }
+    },
+    "switch": {
+      "use_soc_for_charge_discharge": { "name": "[D05]使用SOC进行充放电" },
+      "system_switch": { "name": "系统开关" },
+      "remote_anti_backflow": { "name": "[D22]远程防逆流开关盒" },
+      "anti_backflow_mode": { "name": "[D16]并网防逆流状态" },
+      "sys_led": { "name": "状态指示灯" }
+    },
+    "number": {
+      "batt_min_volt": { "name": "[D11]电池最低放电电压" },
+      "batt_start_volt": { "name": "[D12]电池开始放电电压" },
+      "grid_charge_current": { "name": "[D13]市电最大充电电流" },
+      "pv_charge_current": { "name": "[D14]PV最大充电电流" },
+      "comm_address": { "name": "通讯地址" },
+      "equal_volt": { "name": "均衡电压" },
+      "float_volt": { "name": "浮充电压" },
+      "charge_curr_set": { "name": "充电电流设置" },
+      "batt_low_volt": { "name": "电池欠压保护" },
+      "batt_recover_volt": { "name": "电池恢复电压" },
+      "inv_grid_current_max": { "name": "[D18]逆变器最大并网电流" },
+      "charge_soc": { "name": "[D19]放电截止 SOC" },
+      "discharge_soc": { "name": "[D20]放电开始 SOC" },
+      "anti_backflow_power": { "name": "[D23]防逆流功率调节" },
+      "batt_cutoff_volt": { "name": "[D15]电池截止电压" },
+      "cal_volt": { "name": "校准电压" },
+      "batt_num": { "name": "电池数量" }
+    },
+    "button": {
+      "reset_energy": { "name": "重置电量" },
+      "sys_restart": { "name": "重启模块" },
+      "sys_reconfig": { "name": "重置WiFi" },
+      "sys_reset_wifi": { "name": "重新配置模块" }
+    }
+  }
+}

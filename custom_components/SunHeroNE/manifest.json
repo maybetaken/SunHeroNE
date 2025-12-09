@@ -1,0 +1,25 @@
+{
+  "domain": "SunHeroNE",
+  "name": "SunHeroNE",
+  "codeowners": [
+    "@maybetaken"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "mqtt",
+    "network"
+  ],
+  "documentation": "https://github.com/maybetaken/SunHeroNE",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/maybetaken/SunHeroNE/issues",
+  "requirements": [
+    "zeroconf"
+  ],
+  "version": "1.0.0",
+  "zeroconf": [
+    {
+      "name": "*",
+      "type": "_sunherone._tcp.local."
+    }
+  ]
+}

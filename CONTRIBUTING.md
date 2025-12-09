@@ -1,6 +1,6 @@
-# Contributing to Solar Manager
+# Contributing to SunHeroNE
 
-Thank you for your interest in contributing to Solar Manager! Please follow these guidelines to ensure a smooth contribution process.
+Thank you for your interest in contributing to SunHeroNE! Please follow these guidelines to ensure a smooth contribution process.
 
 ## Submitting Issues
 - Use the provided Issue templates (Bug Report or Feature Request).

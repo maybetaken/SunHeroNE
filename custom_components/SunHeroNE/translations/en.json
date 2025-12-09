@@ -1,0 +1,163 @@
+{
+  "config": {
+    "abort": {
+      "hub_already_configured": "Hub is already configured.",
+      "no_sn_found": "Could not determine device serial number.",
+      "mqtt_required": "MQTT integration not found. Please configure MQTT in Home Assistant first."
+    },
+    "step": {
+      "user": {
+        "title": "Configure SunHero Broadcast",
+        "description": "Enter the MQTT broker details. These will be broadcasted to devices for provisioning.",
+        "data": {
+          "mqtt_host": "MQTT Broker IP",
+          "mqtt_port": "Port",
+          "mqtt_user": "Username",
+          "mqtt_pass": "Password"
+        }
+      },
+      "discovery_confirm": {
+        "title": "Add SunHeroNE Device",
+        "description": "Device found: {name}. Add now?"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Update Broadcast Info",
+        "data": {
+          "mqtt_host": "MQTT Broker IP",
+          "mqtt_port": "Port",
+          "mqtt_user": "Username",
+          "mqtt_pass": "Password"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "batt_rated_volt": { "name": "[D09]Battery Rated Voltage", "state": { "96v": "96V", "72v": "72V", "48v": "48V", "24v": "24V", "12v": "12V" } },
+      "inverter_status": { "name": "Inverter Status", "state": { "shutdown": "Shutdown", "inverting": "Inverting", "charging": "Charging", "anti_backflow": "Anti-Backflow", "bypass": "Bypass", "off_grid": "Off Grid" } },
+      "pv_flow": { "name": "PV Flow", "state": { "no_pv": "No PV", "present": "Present", "generating": "Generating" } },
+      "batt_flow": { "name": "Battery Flow", "state": { "no_battery": "No Batt", "present": "Standby", "charging": "Charging", "discharging": "Discharging" } },
+      "grid_flow": { "name": "Grid Flow", "state": { "no_grid": "No Grid", "present": "Standby", "importing": "Importing", "exporting": "Exporting" } },
+      "load_flow": { "name": "Load Flow", "state": { "no_load": "No Load", "load_active": "Active" } },
+      "mppt_fault": { "name": "MPPT Fault", "state": { "normal": "Normal", "batt_undervolt": "Batt Low", "batt_overvolt": "Batt High", "over_temp": "Over Temp", "pv_overvolt": "PV High", "over_current": "Over Current", "short_circuit": "Short Circuit" } },
+      "work_status": { "name": "Work Status", "state": { "shutdown": "Off", "pre_charge": "Pre-Charge", "cc_charge": "CC Charge", "cv_charge": "CV Charge", "tracking": "Tracking", "bus_cv": "Bus CV", "float_charge": "Float" } },
+      "machine_model": { "name": "Machine Model", "state": { "2_2kw": "2.2KW", "3_5kw": "3.5KW", "5_0kw": "5.0KW", "7_5kw": "7.5KW", "8_0kw": "8.0KW", "10_0kw": "10KW", "12_0kw": "12KW" } },
+      "mppt_status": { "name": "MPPT Status", "state": { "cv": "CV", "full_load": "Full Load", "current_limit": "Current Limit", "tracking": "Tracking" } },
+      "sys_fault": { "name":"System Fault", "state": { "min_in_volt": "Min In Volt", "max_in_volt": "Max In Volt", "in_over_freq": "Over Freq", "in_under_freq": "Under Freq", "grid_switch": "Grid Switch", "inv_short": "Inv Short", "in_over_curr": "Over Current", "inv_bus_over": "Bus Over", "pv1_over": "PV1 Over", "pv2_over": "PV2 Over", "pv1_over_curr": "PV1 Over Curr", "pv2_over_curr": "PV2 Over Curr", "charge_over_curr": "Chg Over Curr", "charge_over_volt": "Chg Over Volt", "batt_volt_prot": "Batt Prot", "inv_over_temp": "Inv Over Temp", "normal": "Normal" } },
+      "sw_version": { "name": "Software Version" },
+      "inv_output_max": { "name": "[D08]Inverter Max Output" },
+      "grid_volt": { "name": "Grid Voltage" },
+      "grid_power": { "name": "Grid Power" },
+      "load_power": { "name": "Load Power" },
+      "battery_volt": { "name": "Battery Voltage" },
+      "battery_charge_discharge_current": { "name": "Battery Charge Discharge Current" },
+      "pv1_power": { "name": "PV1 Power" },
+      "daily_yield": { "name": "Daily Yield" },
+      "total_yield": { "name": "Total Yield" },
+      "fault_status": { "name": "Fault Code" },
+      "inv_temp": { "name": "Inverter Temp" },
+      "soc": { "name": "SOC" },
+      "batt_volt": { "name": "Battery Voltage" },
+      "batt_curr": { "name": "Battery Current" },
+      "pv_volt": { "name": "PV Voltage" },
+      "charge_pow": { "name": "Charge Power" },
+      "mppt_temp": { "name": "MPPT Temp" },
+      "mppt1_temp": { "name": "MPPT1 Temp" },
+      "mppt2_temp": { "name": "MPPT2 Temp" },
+      "mppt3_temp": { "name": "MPPT3 Temp" },
+      "mppt_out_curr": { "name": "MPPT Output Current" },
+      "sys_ip": { "name": "WiFi IP" },
+      "sys_rssi": { "name": "WiFi Signal" },
+      "sys_ssid": { "name": "WiFi SSID" },
+      "sys_version": { "name": "Module Version" },
+      "bus_volt": { "name": "Bus Voltage" },
+      "grid_freq": { "name": "Grid Frequency" },
+      "inv_out_volt": { "name": "Inverter Out Voltage" },
+      "inv_off_load_curr": { "name": "Inv Off Load Current" },
+      "inv_grid_curr": { "name": "Inv Grid Current" },
+      "inv_curr": { "name": "Inverter Current" },
+      "load_pf": { "name": "Load Power Factor" },
+      "inverter_pf": { "name": "Inverter Power Factor" },
+      "inv_io_power": { "name": "Inv IO Power" },
+      "grid_rs_volt": { "name": "Grid RS Volt" },
+      "grid_st_volt": { "name": "Grid ST Volt" },
+      "grid_tr_volt": { "name": "Grid TR Volt" },
+      "grid_rs_curr": { "name": "Grid RS Curr" },
+      "grid_st_curr": { "name": "Grid ST Curr" },
+      "grid_tr_curr": { "name": "Grid TR Curr" },
+      "mppt1_volt": { "name": "MPPT1 Volt" },
+      "mppt2_volt": { "name": "MPPT2 Volt" },
+      "mppt3_volt": { "name": "MPPT3 Volt" },
+      "mppt1_curr": { "name": "MPPT1 Curr" },
+      "mppt2_curr": { "name": "MPPT2 Curr" },
+      "mppt3_curr": { "name": "MPPT3 Curr" },
+      "mppt1_pow": { "name": "MPPT1 Power" },
+      "mppt2_pow": { "name": "MPPT2 Power" },
+      "mppt3_pow": { "name": "MPPT3 Power" },
+      "mppt_daily": { "name": "MPPT Daily" },
+      "mppt_total": { "name": "MPPT Total" },
+      "dcdc_temp": { "name": "DCDC Temp" },
+      "chg_lim_volt": { "name": "Charge Limit Volt" },
+      "chg_lim_curr": { "name": "Charge Limit Curr" },
+      "dis_lim_volt": { "name": "Discharge Limit Volt" },
+      "dis_lim_curr": { "name": "Discharge Limit Curr" },
+      "batt_total_volt": { "name": "Batt Total Volt" },
+      "batt_total_curr": { "name": "Batt Total Curr" },
+      "max_temp": { "name": "Max Temp" },
+      "soh": { "name": "SOH" },
+      "remain_cap": { "name": "Remaining Cap" },
+      "full_cap": { "name": "Full Cap" },
+      "cycle_count": { "name": "Cycles" },
+      "relay_status": { "name": "Relay Status" },
+      "alarm_flag": { "name": "Alarm Flag" },
+      "protection_flag": { "name": "Protection Flag" }
+    },
+    "select": {
+      "work_mode": { "name": "[D01]Work Mode", "state": { "sub_solar_grid_storage": "SUB", "uti_grid_priority": "UTI", "sbu_solar_storage_grid": "SBU", "nbu_no_battery": "NBU", "oni_pure_inverter": "ONI" }},
+      "grid_volt_range": { "name": "[D02]Grid Voltage Range", "state": { "wide_90_270v": "Wide 90-270V", "normal_160_240v": "Normal 160-240V" } },
+      "inv_ac_volt": { "name": "[D03]Inverter AC Voltage", "state": { "110v": "110V", "120v": "120V", "208v": "208V", "220v": "220V", "230v": "230V", "240v": "240V" }},
+      "charge_priority": { "name": "[D06]Charge Priority", "state": { "solar_priority": "Solar Priority", "grid_priority": "Grid Priority", "solar_and_grid": "Solar & Grid", "solar_only": "Solar Only" }},
+      "battery_type": { "name": "[D07]Battery Type","state": { "lead_acid": "Lead Acid", "lithium": "Lithium" } },
+      "batt_type": { "name": "Battery Type", "state": { "lead_acid": "Lead Acid", "lithium": "Lithium" } },
+      "force_control": { "name": "[D21]Force Control", "state": { "normal": "Normal", "force_charge": "Force Charge", "force_discharge": "Force Discharge" } },
+      "ac_freq": { "name": "[D04]AC Frequency", "state": { "50hz": "50Hz", "60hz": "60Hz" } },
+      "schedule_enable": { "name": "Schedule Enable", "state": { "disabled": "Disabled", "charge_only": "Charge Only", "discharge_only": "Discharge Only", "both": "Both" } }
+    },
+    "switch": {
+      "use_soc_for_charge_discharge": { "name": "Use SOC for Charge/Discharge" },
+      "system_switch": { "name": "System Switch" },
+      "remote_anti_backflow": { "name": "Remote Anti Backflow Switch" },
+      "anti_backflow_mode": { "name": "Anti Backflow Mode" },
+      "sys_led": { "name": "Status LED" }
+    },
+    "number": {
+      "batt_min_volt": { "name": "[D11]Batt Min Volt" },
+      "batt_start_volt": { "name": "[D12]Batt Start Volt" },
+      "grid_charge_current": { "name": "[D13]Grid Charge Current" },
+      "pv_charge_current": { "name": "[D14]PV Charge Current" },
+      "comm_address": { "name": "Comm Address" },
+      "equal_volt": { "name": "Equalization Volt" },
+      "float_volt": { "name": "Float Volt" },
+      "charge_curr_set": { "name": "Charge Current" },
+      "batt_low_volt": { "name": "Batt Low Volt" },
+      "batt_recover_volt": { "name": "Batt Recover Volt" },
+      "inv_grid_current_max": { "name": "[D18]Inv Grid Max Current" },
+      "charge_soc": { "name": "[D19]Charge SOC" },
+      "discharge_soc": { "name": "[D20]Discharge SOC" },
+      "anti_backflow_power": { "name": "[D23]Anti Backflow Power" },
+      "batt_cutoff_volt": { "name": "[D15]Batt Cutoff Volt" },
+      "cal_volt": { "name": "Calibrate Voltage" },
+      "batt_num": { "name": "Battery Number" }
+    },
+    "button": {
+      "reset_energy": { "name": "Reset Energy" },
+      "sys_restart": { "name": "Restart" },
+      "sys_reconfig": { "name": "Reset WiFi" },
+      "sys_reset_wifi": { "name": "Reconfigure Module" }
+    }
+  }
+}
