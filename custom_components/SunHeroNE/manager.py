@@ -21,6 +21,7 @@ class CentralMqttManager:
         self._devices = {}
         self._unsub = None
         self._hb_task = None
+        self._background_tasks = set()
 
     async def async_start(self):
         if self._unsub: return
@@ -34,11 +35,16 @@ class CentralMqttManager:
             self._unsub()
             self._unsub = None
         if self._hb_task: self._hb_task.cancel()
+        for task in self._background_tasks:
+            task.cancel()
+        self._background_tasks.clear()
 
     def register_device(self, device):
         self._devices[device.device_id] = device
         device.set_mqtt_publisher(self.publish_to_device)
-        asyncio.create_task(self._send_init_commands(device))
+        task = asyncio.create_task(self._send_init_commands(device))
+        self._background_tasks.add(task)
+        task.add_done_callback(self._background_tasks.discard)
 
     def unregister_device(self, device_id):
         if device_id in self._devices:
@@ -46,11 +52,14 @@ class CentralMqttManager:
             del self._devices[device_id]
 
     async def _send_init_commands(self, device):
-        await asyncio.sleep(0.5)
-        await device.async_send_config_to_device()
-        await asyncio.sleep(1)
-        await device.async_request_initial_status()
-
+        """Send Config and ask for Status immediately."""
+        try:
+            await asyncio.sleep(2) 
+            await device.async_send_config_to_device()
+            await asyncio.sleep(1)
+            await device.async_request_initial_status()
+        except Exception as e:
+            _LOGGER.error(f"Failed to send init commands to {device.device_id}: {e}")
 
     async def _mqtt_callback(self, msg):
         try:
@@ -58,8 +67,7 @@ class CentralMqttManager:
             length = len(parts)
             if length < 3: return
             sn = parts[1]
-            
-            # Loopback protection
+
             msg_type = parts[-1]
             if msg_type in ["cmd", "set", "config", "ota"]: return
             
