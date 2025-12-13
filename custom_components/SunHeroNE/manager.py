@@ -65,8 +65,8 @@ class CentralMqttManager:
             pass
 
     async def publish_to_device(self, sn, slave_id, type_str, payload):
-        if type_str == "config":
-             topic = f"SunHeroNE/{sn}/config"
+        if slave_id == None:
+             topic = f"SunHeroNE/{sn}/" + type_str
         else:
              topic = f"SunHeroNE/{sn}/{slave_id}/{type_str}"
         await mqtt.async_publish(self.hass, topic, payload, qos=1)

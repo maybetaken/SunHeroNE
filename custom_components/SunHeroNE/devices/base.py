@@ -68,7 +68,7 @@ class SunHeroBaseDevice:
         if key in self._callbacks: self._callbacks[key].discard(cb)
 
     def _reset_timer(self, source_type):
-        self._last_seen[source_type] = time.time()
+        self._last_seen[source_type] = int(time.time())
         if not self._available_state[source_type]:
             self._available_state[source_type] = True
             self._notify_source_status(source_type)
@@ -98,8 +98,6 @@ class SunHeroBaseDevice:
                 
                 if key == "sys_version": 
                     self._update_registry_version(new_val)
-                    # Trigger Config on version change/report
-                    self.hass.async_create_task(self._send_config_on_version_report())
                 
                 if key in self._callbacks:
                     for cb in self._callbacks[key]:
@@ -117,6 +115,7 @@ class SunHeroBaseDevice:
              try:
                  ver_str = payload.decode("utf-8")
                  self._handle_json_msg(json.dumps({"ver": ver_str}).encode())
+                 self.hass.async_create_task(self._send_config_on_version_report())
              except: pass
         else:
              self.on_protocol_msg(msg_type, payload)
@@ -127,23 +126,14 @@ class SunHeroBaseDevice:
         self._reset_timer("json")
         
         updates = {}
-        should_send_config = False
-
         for k, v in data.items():
             if k in self.json_map:
                 for config in self.json_map[k]:
                     key = config['key']
                     updates[key] = v
-                    # Check for version key to trigger config
-                    if key == "sys_version":
-                        should_send_config = True
 
         if updates:
-            self.apply_updates(updates)
-
-        # Force config send if version was present (even if value didn't change)
-        if should_send_config:
-            self.hass.async_create_task(self._send_config_on_version_report())
+            self.apply_updates(updates)           
 
     def on_protocol_msg(self, msg_type, payload):
         pass
@@ -166,22 +156,20 @@ class SunHeroBaseDevice:
             payload = custom_payload if custom_payload else cfg.get("command_payload", {})
             if self._mqtt_publish:
                 await self._mqtt_publish(
-                    self.device_id, 0, "cmd", 
+                    self.device_id, None, "cmd", 
                     SystemJsonCodec.encode_command(payload)
                 )
 
     async def async_send_config_to_device(self):
         payload = self.get_config_payload()
         if self._mqtt_publish and payload:
-            await self._mqtt_publish(self.device_id, 0, "config", json.dumps(payload))
+            await self._mqtt_publish(self.device_id, None, "config", json.dumps(payload))
 
-    # === NEW: Active Query Method ===
     async def async_request_initial_status(self):
         """Send a command to device asking for immediate status report."""
         if self._mqtt_publish:
-            # Command: {"cmd": "report_status"}
             await self._mqtt_publish(
-                self.device_id, 0, "cmd", 
+                self.device_id, None, "cmd", 
                 json.dumps({"cmd": "report_status"})
             )
 
