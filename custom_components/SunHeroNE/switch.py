@@ -1,3 +1,10 @@
+"""SunHeroNE switch entry for integration.
+
+SunHeroNE or sunherone © 2025 by @maybetaken is
+licensed under Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International.
+"""
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from .const import DOMAIN

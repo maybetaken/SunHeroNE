@@ -1,3 +1,10 @@
+"""SunHeroNE modbus base device for integration.
+
+SunHeroNE or sunherone © 2025 by @maybetaken is
+licensed under Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International.
+"""
+
 from .base import SunHeroBaseDevice
 from ..protocol.modbus_codec import ModbusBinaryCodec
 

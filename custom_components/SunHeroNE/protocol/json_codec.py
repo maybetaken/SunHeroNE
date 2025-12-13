@@ -1,3 +1,10 @@
+"""SunHeroNE JSON codec for integration.
+
+SunHeroNE or sunherone © 2025 by @maybetaken is
+licensed under Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International.
+"""
+
 import json
 
 class SystemJsonCodec:

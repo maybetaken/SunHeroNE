@@ -1,3 +1,10 @@
+"""SunHeroNE Manager for integration.
+
+SunHeroNE or sunherone © 2025 by @maybetaken is
+licensed under Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International.
+"""
+
 import asyncio
 import logging
 import time
